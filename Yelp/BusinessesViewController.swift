@@ -8,9 +8,11 @@
 
 import UIKit
 
-class BusinessesViewController: UIViewController,UITableViewDataSource, UITableViewDelegate {
+class BusinessesViewController: UIViewController,UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
 
     var businesses: [Business]!
+    var businessesBackup:  [Business]!
+    var searchBar: UISearchBar!
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -18,14 +20,16 @@ class BusinessesViewController: UIViewController,UITableViewDataSource, UITableV
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        searchBar = UISearchBar()
+        searchBar.sizeToFit()
+        navigationItem.titleView = searchBar
+        
         tableView.delegate = self
         tableView.dataSource = self
+        searchBar.delegate = self
+        
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 120
-        
-        
-        
-        
         
 
         Business.searchWithTerm("Thai", completion: { (businesses: [Business]!, error: NSError!) -> Void in
@@ -54,6 +58,8 @@ class BusinessesViewController: UIViewController,UITableViewDataSource, UITableV
         super.didReceiveMemoryWarning()
     }
     
+    
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if businesses != nil {
             return businesses!.count
@@ -69,9 +75,35 @@ class BusinessesViewController: UIViewController,UITableViewDataSource, UITableV
         
         return cell
     }
-
-     
+    
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        if(businessesBackup == nil) {
+            businessesBackup = businesses
+        }
         
+        // When there is no text, filteredData is the same as the original data
+        if searchText.isEmpty {
+            businesses = businessesBackup
+        } else {
+            
+            businesses = businesses.filter({(dataItem: Business) -> Bool in
+                
+             
+                if dataItem.name!.rangeOfString(searchText, options: .CaseInsensitiveSearch) != nil {
+                    return true
+                } else {
+                    return false
+                }
+            })
+    }
+        tableView.reloadData()
+  
+    
+ 
+          }
+
+    
+    
     
 
     /*

@@ -16,7 +16,11 @@ class SwitchCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+    onSwitch.addTarget(self, action: "", forControlEvents: UIControlEvents.ValueChanged)
+    }
+    
+    func switchValueChanged() {
+        print("switch Value Changed")
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
