@@ -9,14 +9,21 @@
 import UIKit
 
 class FiltersViewController: UIViewController {
+    
+    var categories: [[String:String]]!
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+//        categories = yelpCategories()
 
-        // Do any additional setup after loading the view.
     }
     
     @IBOutlet weak var tableView: UITableView!
+    
+    
+    
 
 
     override func didReceiveMemoryWarning() {
@@ -33,6 +40,7 @@ class FiltersViewController: UIViewController {
         dismissViewControllerAnimated(true, completion: nil)
     }
 
+    
 
     /*
     // MARK: - Navigation
