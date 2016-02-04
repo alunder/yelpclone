@@ -35,15 +35,14 @@ class FiltersViewController: UIViewController, UITableViewDataSource, UITableVie
     
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return categories.count ?? 0
+        return categories.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("SwitchCell", forIndexPath: indexPath) as! SwitchCell
         cell.switchLabel.text = categories[indexPath.row]["name"]
         
-//        tableView.dequeueReusableCellWithIdentifier("SwitchCell", forIndexPath: indexPath) as! SwitchCell
-////        cell.switchLabel.text = self.categories[indexPath.row]["name"]
+
         
  
         

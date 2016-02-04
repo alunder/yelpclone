@@ -19,12 +19,14 @@ class SwitchCell: UITableViewCell {
     onSwitch.addTarget(self, action: "", forControlEvents: UIControlEvents.ValueChanged)
     }
     
-    func switchValueChanged() {
-        print("switch Value Changed")
-    }
+ 
 
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+        
+        func switchValueChanged() {
+            print("switch Value Changed")
+        }
 
         // Configure the view for the selected state
     }
